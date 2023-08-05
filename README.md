@@ -84,7 +84,7 @@ lime build linux
 ```
 
 `html5`
-``` 
+```
 lime test html5
 lime test html5 -debug
 lime build html5
@@ -105,7 +105,7 @@ Funkin' VS Galaxy Penguin is not an official Super Mario product. Not approved b
 
 ## VS GALAXY PENGUIN
 * It'z_Miles - Developer/Parallax3D <img src="./assets/shared/images/icons/miles.png" width="16">
-* github - [contributors](https://github.com/FNF-VS_GALAXY-PENGUIN/graphs/contributors) <img src= "./assets/shared/images/icons/github.png" width="16">
+* github - [contributors](https://github.com/FNF-VS-GALAXY-PENGUIN/graphs/contributors) <img src= "./assets/shared/images/icons/github.png" width="16">
 
 
 ## Funkin' Crew
@@ -114,4 +114,3 @@ Funkin' VS Galaxy Penguin is not an official Super Mario product. Not approved b
 * evilsk8r - Artist of Friday Night Funkin' <img src="./assets/shared/images/icons/evilsk8r.png" width="16">
 * kawaisprite - Composer of Friday Night Funkin' <img src="./assets/shared/images/icons/kawaisprite.png" width="16">
 * github - [contributors](https://github.com/FunkinCrew/Funkin/graphs/contributors) <img src= "./assets/shared/images/icons/github.png" width="16">
-

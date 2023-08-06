@@ -1,10 +1,10 @@
 
 <?xml version="1.0" encoding="utf-8"?>
 <project>
-	<!-- _________________________ Application Settings _________________________ -->
+	<!-- ____________________ Application Settings ____________________ -->
 
-	<app title="Funkin' VS GALAXY PENGUIN" file="FNF-VS-GALAXY-PENGUIN" packageName="com.itzMiles.FNF-VS-GALAXY-PENGUIN" package="com.itzMiles.FNF-VS-GALAXY-PENGUIN" main="Main" version="1.0" company="Itz_Miles" />
-
+	<app 
+	title="Funkin' VS GALAXY PENGUIN" file="FNF-VS-GALAXY-PENGUIN" packageName="com.itzMiles.FNF-VS-GALAXY-PENGUIN" package="com.itzMiles.FNF-VS-GALAXY-PENGUIN" main="Main" version="1.0" company="Itz_Miles"/>
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />
@@ -19,13 +19,14 @@
 
 	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
 		or you can set the actual size of your file manually at "FlxPreloaderBase-onUpdate-bytesTotal"-->
+
 	<!-- <app preloader="Preloader" /> -->
 	<app preloader="flixel.system.FlxPreloader" />
 
 	<!--Minimum without FLX_NO_GAMEPAD: 11.8, without FLX_NO_NATIVE_CURSOR: 11.2-->
 	<set name="SWF_VERSION" value="11.8" />
 
-	<!-- ____________________________ Window Settings ___________________________ -->
+	<!-- ____________________ Window Settings ____________________ -->
 
 	<!--These window settings apply to all targets-->
 	<window width="1280" height="720" fps="" background="#000000" hardware="true" vsync="false" />
@@ -39,25 +40,24 @@
 	<!--Mobile-specific-->
 	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/>
 
-	<!-- _____________________________ Export Settings ____________________________ -->
+	<!-- ____________________ Export Settings ____________________ -->
 
 	<set name="BUILD_DIR" value="export/debug" if="debug" />
 	<set name="BUILD_DIR" value="export/release" unless="debug" />
 	<set name="BUILD_DIR" value="export/32bit" if="32bits" />
 
 	<classpath name="source"/>
-	
-	<define name="CRASH_HANDLER" if="desktop"/> <!--  "desktop release" /> -->
 
 	<assets path="assets" exclude="*.ogg" if="web" embed="true"/>
 	<assets path="assets" exclude="*.mp3"  unless="web" embed="true"/>
 	
 	<assets path="README.md" rename="README.txt"/>
 
-	<assets path="assets/fonts" embed="true"/>
-	<!-- _______________________________ Libraries ______________________________ -->
+	<!-- ____________________ Libraries ____________________ -->
 
 	<haxelib name="flixel" />
+
+	<!-- ____________________ Customization ____________________ -->
 
 	<!--Disable the Flixel core focus lost screen-->
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
@@ -71,11 +71,7 @@
 	<!--Enable this for Nape release builds for a serious peformance improvement-->
 	<haxedef name="NAPE_RELEASE_BUILD"/>
 	
-	<!--Used for Izzy Engine's crash handler-->
-	<haxedef name="HXCPP_CHECK_POINTER" if="CRASH_HANDLER" />
-	<haxedef name="HXCPP_STACK_LINE" if="CRASH_HANDLER" />
-
-	<!-- _________________________________ Icons _______________________________ -->
+	<!-- _____________________ Icons ____________________ -->
 
 	<icon path="art/icon16.png" size='16'/>
 	<icon path="art/icon32.png" size='32'/>

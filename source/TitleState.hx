@@ -17,10 +17,14 @@ using StringTools;
 
 class TitleState extends MusicBeatState
 {
+	public static var muteKeys:Array<FlxKey> = [FlxKey.ZERO];
+	public static var volumeDownKeys:Array<FlxKey> = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
+	public static var volumeUpKeys:Array<FlxKey> = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
+
 	var logoBl:FlxSprite;
 	var splashText:FlxSprite;
 	var bg:FlxSprite;
-	var titleGF:Character;
+	// var titleGF:Character;
 	var transitioning:Bool;
 	var gamepad:FlxGamepad;
 	var pressedEnter:Bool;
@@ -29,30 +33,52 @@ class TitleState extends MusicBeatState
 	{
 		super.create();
 
-		bg = new FlxSprite().makeGraphic(128, 72, 0x9ac9ff);
-		bg.origin.set(0, 0);
-		bg.scale.x = bg.scale.y = 10.0;
-		add(bg);
-		/*
-			wondering how simple graphics are handled 
-			but im too busy to figure stuff out for now
-			is it faster to scale a small graphic, or draw a large one?
-		 */
+		FlxG.game.focusLostFramerate = 60;
+		FlxG.sound.muteKeys = muteKeys;
+		FlxG.sound.volumeDownKeys = volumeDownKeys;
+		FlxG.sound.volumeUpKeys = volumeUpKeys;
+		FlxG.keys.preventDefaultKeys = [TAB];
+		gamepad = FlxG.gamepads.lastActive;
 
-		logoBl = new FlxSprite(-15, -10).loadGraphic(Paths.image('logos/logo', "shared"));
+		PlayerSettings.init();
+
+		FlxG.save.bind('funkin', CoolUtil.getSavePath());
+		Client.loadPrefs();
+
+		//Highscore.load();
+
+		if (FlxG.save.data.weekCompleted != null)
+		{
+			//StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
+		}
+
+		if (FlxG.sound.music == null)
+		{
+			FlxG.sound.playMusic('assets/music/Inst.mp3', 1);
+
+			FlxG.sound.music.fadeIn(4, 0, 0.7);
+		}
+
+		Conductor.changeBPM(102);
+
+		bg = new FlxSprite(0, 0).loadGraphic('');
+		bg.makeGraphic(1280, 720, 0xFF9AC9FF);
+		bg.origin.set(0, 0);
+		bg.screenCenter();
+		add(bg);
+
+		logoBl = new FlxSprite(-15, -10).makeGraphic(427, 240, 0xffff0000);
 		logoBl.updateHitbox();
-		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
 		add(logoBl);
 
-		splashText = new FlxSprite(0, 560).loadGraphic(Paths.image('text/splashText', "shared"));
+		splashText = new FlxSprite(0, 560).makeGraphic(1280, 97, 0xffff0000);
 		splashText.updateHitbox();
-		splashText.antialiasing = ClientPrefs.globalAntialiasing;
 		splashText.screenCenter(X);
 		add(splashText);
 		FlxTween.tween(splashText.scale, {x: 0.76, y: 0.76}, 0.1, {ease: FlxEase.cubeOut, type: FlxTweenType.PERSIST});
 
-		titleGF = new Character(758, 219, "titleGF", false, "shared");
-		add(titleGF);
+		// titleGF = new Character(758, 219, "titleGF", false, "shared");
+		// add(titleGF);
 
 		FlxG.camera.flash(FlxColor.WHITE, 1.7);
 	}
@@ -95,13 +121,13 @@ class TitleState extends MusicBeatState
 		{
 			if (pressedEnter)
 			{
-				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+				//FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 				splashText.y = 570;
 				transitioning = true;
 
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
-					MusicBeatState.switchState(new MainMenuState());
+					//MusicBeatState.switchState(new MainMenuState());
 				});
 			}
 		}
@@ -124,9 +150,11 @@ class TitleState extends MusicBeatState
 		if (logoBl != null)
 			FlxTween.tween(logoBl.scale, {x: 1, y: 1}, 0.165, {type: FlxTweenType.PERSIST, ease: FlxEase.cubeOut, onComplete: tweenBack});
 
-		if (titleGF != null)
-		{
+		/*
+			if (titleGF != null)
+			{
 			titleGF.dance();
-		}
+			}
+		 */
 	}
 }

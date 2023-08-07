@@ -16,6 +16,8 @@ import lime.app.Application;
 using StringTools;
 class Main extends Sprite
 {
+	public static var fpsVar:FPS;
+	
 	var game = {
 		width: 1280, // WINDOW width
 		height: 720, // WINDOW height
@@ -68,7 +70,7 @@ class Main extends Sprite
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		if (fpsVar != null)
 		{
-			fpsVar.visible = ClientPrefs.showFPS;
+			fpsVar.visible = Client.showFPS;
 		}
 		#end
 

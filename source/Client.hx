@@ -8,11 +8,8 @@ import Controls;
 class Client
 {
 	public static var downScroll:Bool = false;
-	public static var showFPS:Bool = true;
-	public static var flashing:Bool = true;
-	public static var noteSplashes:Bool = true;
 	public static var framerate:Int = 60;
-	public static var hudZooms:Bool = true;
+	public static var showFPS:Bool = true;
 	public static var noteOffset:Int = 0;
 	public static var timeBarType:String = 'Time Left';
 	public static var noReset:Bool = false;
@@ -20,7 +17,6 @@ class Client
 	public static var controllerMode:Bool = false;
 	public static var difficulty:String = 'Hard';
 
-	public static var firstIntro:Bool = true;
 	public static var hitsoundVolume:Float = 0;
 	public static var relativeHitCalc:Bool = true;
 
@@ -64,12 +60,12 @@ class Client
 	public static function saveSettings()
 	{
 		// i dont really know if i should use set field or set property
-		for (field in Type.getClassFields(ClientPrefs))
+		for (field in Type.getClassFields(Client))
 		{
-			if (Type.typeof(Reflect.field(ClientPrefs, field)) != TFunction)
+			if (Type.typeof(Reflect.field(Client, field)) != TFunction)
 			{
 				if (!importantMap.get("saveBlackList").contains(field))
-					Reflect.setField(FlxG.save.data, field, Reflect.field(ClientPrefs, field));
+					Reflect.setField(FlxG.save.data, field, Reflect.field(Client, field));
 			}
 		}
 
@@ -81,7 +77,7 @@ class Client
 		FlxG.save.flush();
 
 		var save:FlxSave = new FlxSave();
-		save.bind('controls', CoolUtil.getSavePath());
+		//save.bind('controls', CoolUtil.getSavePath());
 		save.data.customControls = keyBinds;
 		save.flush();
 		FlxG.log.add("Settings saved!");
@@ -89,15 +85,15 @@ class Client
 
 	public static function loadPrefs()
 	{
-		for (field in Type.getClassFields(ClientPrefs))
+		for (field in Type.getClassFields(Client))
 		{
-			if (Type.typeof(Reflect.field(ClientPrefs, field)) != TFunction)
+			if (Type.typeof(Reflect.field(Client, field)) != TFunction)
 			{
 				if (!importantMap.get("loadBlackList").contains(field))
 				{
-					var defaultValue:Dynamic = Reflect.field(ClientPrefs, field);
+					var defaultValue:Dynamic = Reflect.field(Client, field);
 					var flxProp:Dynamic = Reflect.field(FlxG.save.data, field);
-					Reflect.setField(ClientPrefs, field, (flxProp != null ? flxProp : defaultValue));
+					Reflect.setField(Client, field, (flxProp != null ? flxProp : defaultValue));
 
 					if (field == "showFPS" && Main.fpsVar != null)
 						Main.fpsVar.visible = showFPS;
@@ -143,12 +139,12 @@ class Client
 	{
 		PlayerSettings.player1.controls.setKeyboardScheme(KeyboardScheme.Solo);
 
-		IntroState.muteKeys = copyKey(keyBinds.get('volume_mute'));
-		IntroState.volumeDownKeys = copyKey(keyBinds.get('volume_down'));
-		IntroState.volumeUpKeys = copyKey(keyBinds.get('volume_up'));
-		FlxG.sound.muteKeys = IntroState.muteKeys;
-		FlxG.sound.volumeDownKeys = IntroState.volumeDownKeys;
-		FlxG.sound.volumeUpKeys = IntroState.volumeUpKeys;
+		TitleState.muteKeys = copyKey(keyBinds.get('volume_mute'));
+		TitleState.volumeDownKeys = copyKey(keyBinds.get('volume_down'));
+		TitleState.volumeUpKeys = copyKey(keyBinds.get('volume_up'));
+		FlxG.sound.muteKeys = TitleState.muteKeys;
+		FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
+		FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
 	}
 
 	public static function copyKey(arrayToCopy:Array<FlxKey>):Array<FlxKey>

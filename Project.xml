@@ -42,9 +42,8 @@
 
 	<!-- ____________________ Export Settings ____________________ -->
 
-	<set name="BUILD_DIR" value="export/debug" if="debug" />
-	<set name="BUILD_DIR" value="export/release" unless="debug" />
-	<set name="BUILD_DIR" value="export/32bit" if="32bits" />
+	<set name="BUILD_DIR" value="export"/>
+	<set name="BUILD_DIR" value="export/32bit" if="32bits"/>
 
 	<classpath name="source"/>
 
@@ -55,7 +54,8 @@
 
 	<!-- ____________________ Libraries ____________________ -->
 
-	<haxelib name="flixel" />
+	<haxelib name="flixel"/>
+	<haxelib name="flixel-addons"/>
 
 	<!-- ____________________ Customization ____________________ -->
 
@@ -73,8 +73,8 @@
 	
 	<!-- _____________________ Icons ____________________ -->
 
-	<icon path="art/icon16.png" size='16'/>
-	<icon path="art/icon32.png" size='32'/>
-	<icon path="art/icon64.png" size='64'/>
-	<icon path="art/iconOG.png" />
+	<icon path="icons/icon16.png" size='16' embed="true"/>
+	<icon path="icons/icon32.png" size='32' embed="true"/>
+	<icon path="icons/icon64.png" size='64' embed="true"/>
+	<icon path="icons/iconOG.png" embed="true"/>
 </project>

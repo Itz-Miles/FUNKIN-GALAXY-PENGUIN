@@ -56,6 +56,8 @@
 
 	<haxelib name="flixel"/>
 	<haxelib name="flixel-addons"/>
+	<haxelib name="flixel-ui"/>
+	<!--<haxelib name="parallax-3d"/>-->
 
 	<!-- ____________________ Customization ____________________ -->
 

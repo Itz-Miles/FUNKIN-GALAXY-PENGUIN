@@ -14,7 +14,6 @@ import openfl.display.StageScaleMode;
 import lime.app.Application;
 
 using StringTools;
-
 class Main extends Sprite
 {
 	var game = {
@@ -59,7 +58,7 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
-		ClientPrefs.loadDefaultKeys();
+		Client.loadDefaultKeys();
 		addChild(new FlxGame(game.width, game.height, game.initialState, game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
 
 		#if !mobile
@@ -70,17 +69,6 @@ class Main extends Sprite
 		if (fpsVar != null)
 		{
 			fpsVar.visible = ClientPrefs.showFPS;
-		}
-		#end
-
-		#if desktop
-		if (!DiscordClient.isInitialized)
-		{
-			DiscordClient.initialize();
-			Application.current.window.onClose.add(function()
-			{
-				DiscordClient.shutdown();
-			});
 		}
 		#end
 

@@ -34,7 +34,6 @@ class MusicBeatState extends FlxUIState
 
 	override function update(elapsed:Float)
 	{
-		// everyStep();
 		var oldStep:Int = curStep;
 
 		updateCurStep();
@@ -45,13 +44,15 @@ class MusicBeatState extends FlxUIState
 			if (curStep > 0)
 				stepHit();
 
-			if (PlayState.SONG != null)
-			{
-				if (oldStep < curStep)
-					updateSection();
-				else
-					rollbackSection();
-			}
+			/*
+				if (PlayState.SONG != null)
+				{
+					if (oldStep < curStep)
+						updateSection();
+					else
+						rollbackSection();
+				}
+			 */
 		}
 
 		if (FlxG.save.data != null)
@@ -81,6 +82,7 @@ class MusicBeatState extends FlxUIState
 		var lastSection:Int = curSection;
 		curSection = 0;
 		stepsToDo = 0;
+		/*
 		for (i in 0...PlayState.SONG.notes.length)
 		{
 			if (PlayState.SONG.notes[i] != null)
@@ -92,6 +94,7 @@ class MusicBeatState extends FlxUIState
 				curSection++;
 			}
 		}
+		*/
 
 		if (curSection > lastSection)
 			sectionHit();
@@ -107,7 +110,7 @@ class MusicBeatState extends FlxUIState
 	{
 		var lastChange = Conductor.getBPMFromSeconds(Conductor.songPosition);
 
-		var shit = ((Conductor.songPosition - ClientPrefs.noteOffset) - lastChange.songTime) / lastChange.stepCrochet;
+		var shit = ((Conductor.songPosition - Client.noteOffset) - lastChange.songTime) / lastChange.stepCrochet;
 		curDecStep = lastChange.stepTime + shit;
 		curStep = lastChange.stepTime + Math.floor(shit);
 	}
@@ -172,12 +175,13 @@ class MusicBeatState extends FlxUIState
 	{
 		// trace('Section: ' + curSection + ', Beat: ' + curBeat + ', Step: ' + curStep);
 	}
-
 	function getBeatsOnSection()
 	{
 		var val:Null<Float> = 4;
+		/*
 		if (PlayState.SONG != null && PlayState.SONG.notes[curSection] != null)
 			val = PlayState.SONG.notes[curSection].sectionBeats;
+		*/
 		return val == null ? 4 : val;
 	}
 }

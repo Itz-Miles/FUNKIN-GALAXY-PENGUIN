@@ -9,12 +9,6 @@
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />
 
-	<error value="Seems like you're using Haxe ${haxe}." if="${haxe != 4.3.1}" />
-	<!--
-	<error value="Seems like you're using Haxe ${haxe}." if="${haxe != 4.3.1}" />
-	<error value="Seems like you're using Haxe ${haxe}." if="${haxe != 4.3.1}" />
-	<error value="Seems like you're using Haxe ${haxe}." if="${haxe != 4.3.1}" />
-	-->
 	<!-- <haxedef name="no-deprecation-warnings"/> -->
 
 	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
@@ -57,6 +51,9 @@
 	<haxelib name="flixel"/>
 	<haxelib name="flixel-addons"/>
 	<haxelib name="flixel-ui"/>
+	<haxelib name="hxcpp"/>
+	<haxelib name="tjson"/>
+	<haxelib name="hxjsonast"/>
 	<!--<haxelib name="parallax-3d"/>-->
 
 	<!-- ____________________ Customization ____________________ -->

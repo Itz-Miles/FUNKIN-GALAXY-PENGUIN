@@ -25,7 +25,7 @@ class TitleState extends MusicBeatState
 	var logoBl:FlxSprite;
 	var splashText:FlxText;
 	var bg:FlxSprite;
-	var titleBF:FlxSprite; //Character;
+	var titleBF:FlxSprite; // Character;
 	var transitioning:Bool;
 	var gamepad:FlxGamepad;
 	var pressedEnter:Bool;
@@ -55,7 +55,7 @@ class TitleState extends MusicBeatState
 
 		if (FlxG.sound.music == null)
 		{
-			FlxG.sound.playMusic('assets/music/Inst.mp3', 1);
+			FlxG.sound.playMusic(EXT.music('Inst'), 1);
 
 			FlxG.sound.music.fadeIn(4, 0, 0.7);
 		}
@@ -68,32 +68,29 @@ class TitleState extends MusicBeatState
 		add(bg);
 
 		logoBl = new FlxSprite(20, 20).loadGraphic('assets/images/placeholder logo.png');
-		//.makeGraphic(700, 480, 0xffbc0000);
 		add(logoBl);
 
 		splashText = new FlxText(80, 590, 600, 'Press Enter to Start', 36);
 		splashText.setFormat('assets/fonts/pop-happiness.otf', 52, FlxColor.WHITE, CENTER, SHADOW, FlxColor.BLACK);
-		//splashText.screenCenter(X);
 		splashText.borderSize = 2;
 		splashText.shadowOffset.set(0, 3);
 		add(splashText);
 
 		titleBF = new FlxSprite(840, 80).makeGraphic(300, 440, 0xFFFF3D3D);
 		add(titleBF);
-		// add(titleGF);
 
 		FlxG.camera.flash(FlxColor.WHITE, 1.7);
 	}
 
 	override function update(elapsed:Float)
 	{
+		titleBF.angle += 80 * elapsed;
+
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 
 		if (FlxG.keys.justPressed.ENTER || controls.ACCEPT)
 			pressedEnter = true;
-
-		titleBF.angle += 80 * elapsed;
 
 		#if mobile
 		for (touch in FlxG.touches.list)
@@ -120,13 +117,13 @@ class TitleState extends MusicBeatState
 		{
 			if (pressedEnter)
 			{
-				// FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
-				// splashText.y = 570;
+				FlxG.sound.play(EXT.sound('start'));
+				//splashText.y = 570;
 				transitioning = true;
 
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
-					// MusicBeatState.switchState(new MainMenuState());
+					MusicBeatState.resetState();
 				});
 			}
 		}
@@ -144,16 +141,11 @@ class TitleState extends MusicBeatState
 		super.beatHit();
 		if (splashText != null)
 			FlxTween.tween(splashText.scale, {x: 1, y: 1}, (60 / Conductor.bpm) * 0.25, {type: FlxTweenType.PERSIST, ease: FlxEase.cubeOut});
-		if (splashText != null)
-			splashText.y = 590; // might tween back later
 		if (logoBl != null)
-			FlxTween.tween(logoBl.scale, {x: 1, y: 1}, (60 / Conductor.bpm) * 0.25, {type: FlxTweenType.PERSIST, ease: FlxEase.cubeOut, onComplete: tweenBack});
+			FlxTween.tween(logoBl.scale, {x: 1, y: 1}, (60 / Conductor.bpm) * 0.25,
+				{type: FlxTweenType.PERSIST, ease: FlxEase.cubeOut, onComplete: tweenBack});
 
-		/*
-			if (titleBF != null)
-			{
-			titleBF.dance();
-			}
-		 */
+		//if (titleBF != null)
+			// titleBF.dance();
 	}
 }

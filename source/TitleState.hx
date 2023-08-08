@@ -1,5 +1,6 @@
 package;
 
+import flixel.text.FlxText;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -22,7 +23,7 @@ class TitleState extends MusicBeatState
 	public static var volumeUpKeys:Array<FlxKey> = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
 
 	var logoBl:FlxSprite;
-	var splashText:FlxSprite;
+	var splashText:FlxText;
 	var bg:FlxSprite;
 	// var titleGF:Character;
 	var transitioning:Bool;
@@ -45,11 +46,11 @@ class TitleState extends MusicBeatState
 		FlxG.save.bind('funkin', CoolUtil.getSavePath());
 		Client.loadPrefs();
 
-		//Highscore.load();
+		// Highscore.load();
 
 		if (FlxG.save.data.weekCompleted != null)
 		{
-			//StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
+			// StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 		}
 
 		if (FlxG.sound.music == null)
@@ -59,7 +60,7 @@ class TitleState extends MusicBeatState
 			FlxG.sound.music.fadeIn(4, 0, 0.7);
 		}
 
-		Conductor.changeBPM(102);
+		Conductor.changeBPM(85);
 
 		bg = new FlxSprite(0, 0).loadGraphic('');
 		bg.makeGraphic(1280, 720, 0xFF9AC9FF);
@@ -71,11 +72,13 @@ class TitleState extends MusicBeatState
 		logoBl.updateHitbox();
 		add(logoBl);
 
-		splashText = new FlxSprite(0, 560).makeGraphic(1280, 97, 0xffff0000);
+		splashText = new FlxText(0, 560, 0, "Press DFJK to Start", 36);
+		splashText.scrollFactor.set(0, 0);
+		splashText.setFormat('assets/fonts/pop-happiness.otf', 92, FlxColor.WHITE);
 		splashText.updateHitbox();
 		splashText.screenCenter(X);
 		add(splashText);
-		FlxTween.tween(splashText.scale, {x: 0.76, y: 0.76}, 0.1, {ease: FlxEase.cubeOut, type: FlxTweenType.PERSIST});
+		FlxTween.tween(splashText.scale, {x: 0.76, y: 0.76}, (60 / Conductor.bpm) * 0.25, {ease: FlxEase.cubeOut, type: FlxTweenType.PERSIST});
 
 		// titleGF = new Character(758, 219, "titleGF", false, "shared");
 		// add(titleGF);
@@ -121,13 +124,13 @@ class TitleState extends MusicBeatState
 		{
 			if (pressedEnter)
 			{
-				//FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+				// FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 				splashText.y = 570;
 				transitioning = true;
 
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
-					//MusicBeatState.switchState(new MainMenuState());
+					// MusicBeatState.switchState(new MainMenuState());
 				});
 			}
 		}
@@ -136,19 +139,19 @@ class TitleState extends MusicBeatState
 
 	function tweenBack(tween:FlxTween):Void
 	{
-		FlxTween.tween(splashText.scale, {x: 0.76, y: 0.76}, 0.165, {ease: FlxEase.cubeOut, type: FlxTweenType.PERSIST});
-		FlxTween.tween(logoBl.scale, {x: 0.975, y: 0.975}, 0.165, {ease: FlxEase.cubeOut, type: FlxTweenType.PERSIST});
+		FlxTween.tween(splashText.scale, {x: 0.76, y: 0.76}, (60 / Conductor.bpm) * 0.25, {ease: FlxEase.cubeOut, type: FlxTweenType.PERSIST});
+		FlxTween.tween(logoBl.scale, {x: 0.975, y: 0.975}, (60 / Conductor.bpm) * 0.25, {ease: FlxEase.cubeOut, type: FlxTweenType.PERSIST});
 	}
 
 	override function beatHit()
 	{
 		super.beatHit();
 		if (splashText != null)
-			FlxTween.tween(splashText.scale, {x: 0.79, y: 0.79}, 0.165, {type: FlxTweenType.PERSIST, ease: FlxEase.cubeOut, onComplete: tweenBack});
+			FlxTween.tween(splashText.scale, {x: 0.79, y: 0.79}, (60 / Conductor.bpm) * 0.25, {type: FlxTweenType.PERSIST, ease: FlxEase.cubeOut, onComplete: tweenBack});
 		if (splashText != null)
 			splashText.y = 560; // might tween back later
 		if (logoBl != null)
-			FlxTween.tween(logoBl.scale, {x: 1, y: 1}, 0.165, {type: FlxTweenType.PERSIST, ease: FlxEase.cubeOut, onComplete: tweenBack});
+			FlxTween.tween(logoBl.scale, {x: 1, y: 1}, (60 / Conductor.bpm) * 0.25, {type: FlxTweenType.PERSIST, ease: FlxEase.cubeOut, onComplete: tweenBack});
 
 		/*
 			if (titleGF != null)

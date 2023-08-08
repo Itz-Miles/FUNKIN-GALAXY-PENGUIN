@@ -5,6 +5,7 @@ class EXT
 	public static var AUDIO_EXT = #if web "mp3" #else "ogg" #end;
 	public static var DATA_EXT = "json";
 	public static var ANIM_EXT = "xml";
+	public static var IMG_EXT = "png";
 
 	public static inline function sound(filename:String):String
 	{
@@ -19,6 +20,11 @@ class EXT
 	public static inline function json(filename:String):String
 	{
 		return 'assets/data/$filename.$DATA_EXT';
+	}
+
+	public static inline function png(filename:String):String
+	{
+		return 'assets/images/$filename.$IMG_EXT';
 	}
 
 	public static inline function xml(filename:String):String

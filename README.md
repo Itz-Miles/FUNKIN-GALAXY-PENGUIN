@@ -12,7 +12,7 @@ If you want to download, visit [releases](https://github.com/Itz-Miles/FNF-VS-GA
 # Building From Source
 
 ## Haxe
-You must have [the most up-to-date version of Haxe](https://haxe.org/download/) (4.2.4+) in order to compile.
+You must have [the most up-to-date version of Haxe](https://haxe.org/download/) (4.3.1) in order to compile.
 
 ## Visual Studio / Visual Studio Code
 

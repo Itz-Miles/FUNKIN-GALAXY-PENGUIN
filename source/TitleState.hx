@@ -67,17 +67,16 @@ class TitleState extends MusicBeatState
 		bg.screenCenter();
 		add(bg);
 
-		logoBl = new FlxSprite(20, 20).makeGraphic(700, 480, 0xffbc0000);
-		logoBl.updateHitbox();
+		logoBl = new FlxSprite(20, 20).loadGraphic('assets/images/placeholder logo.png');
+		//.makeGraphic(700, 480, 0xffbc0000);
 		add(logoBl);
 
-		splashText = new FlxText(0, 590, 0, 'Press Enter to Start', 36);
-		splashText.setFormat('assets/fonts/pop-happiness.otf', 92, FlxColor.WHITE, CENTER, SHADOW, FlxColor.BLACK);
-		splashText.screenCenter(X);
+		splashText = new FlxText(80, 590, 600, 'Press Enter to Start', 36);
+		splashText.setFormat('assets/fonts/pop-happiness.otf', 52, FlxColor.WHITE, CENTER, SHADOW, FlxColor.BLACK);
+		//splashText.screenCenter(X);
 		splashText.borderSize = 2;
-		splashText.shadowOffset.set(0, 5);
+		splashText.shadowOffset.set(0, 3);
 		add(splashText);
-		FlxTween.tween(splashText.scale, {x: 0.76, y: 0.76}, (60 / Conductor.bpm) * 0.25, {ease: FlxEase.cubeOut, type: FlxTweenType.PERSIST});
 
 		titleBF = new FlxSprite(840, 80).makeGraphic(300, 440, 0xFFFF3D3D);
 		add(titleBF);
@@ -136,7 +135,7 @@ class TitleState extends MusicBeatState
 
 	function tweenBack(tween:FlxTween):Void
 	{
-		FlxTween.tween(splashText.scale, {x: 0.76, y: 0.76}, (60 / Conductor.bpm) * 0.25, {ease: FlxEase.cubeOut, type: FlxTweenType.PERSIST});
+		FlxTween.tween(splashText.scale, {x: 0.975, y: 0.975}, (60 / Conductor.bpm) * 0.25, {ease: FlxEase.cubeOut, type: FlxTweenType.PERSIST});
 		FlxTween.tween(logoBl.scale, {x: 0.975, y: 0.975}, (60 / Conductor.bpm) * 0.25, {ease: FlxEase.cubeOut, type: FlxTweenType.PERSIST});
 	}
 
@@ -144,16 +143,16 @@ class TitleState extends MusicBeatState
 	{
 		super.beatHit();
 		if (splashText != null)
-			FlxTween.tween(splashText.scale, {x: 0.79, y: 0.79}, (60 / Conductor.bpm) * 0.25, {type: FlxTweenType.PERSIST, ease: FlxEase.cubeOut, onComplete: tweenBack});
+			FlxTween.tween(splashText.scale, {x: 1, y: 1}, (60 / Conductor.bpm) * 0.25, {type: FlxTweenType.PERSIST, ease: FlxEase.cubeOut});
 		if (splashText != null)
 			splashText.y = 590; // might tween back later
 		if (logoBl != null)
 			FlxTween.tween(logoBl.scale, {x: 1, y: 1}, (60 / Conductor.bpm) * 0.25, {type: FlxTweenType.PERSIST, ease: FlxEase.cubeOut, onComplete: tweenBack});
 
 		/*
-			if (titleGF != null)
+			if (titleBF != null)
 			{
-			titleGF.dance();
+			titleBF.dance();
 			}
 		 */
 	}

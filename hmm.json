@@ -16,6 +16,23 @@
       "version": "5.3.1"
     },
     {
+      "name": "flixel-addons",
+      "type": "haxelib",
+      "version": "3.1.1"
+    },
+    {
+      "name": "flixel-tools",
+      "type": "haxelib",
+      "version": "1.5.1"
+    },
+    {
+      "name": "flixel-ui",
+      "type": "git",
+      "dir": null,
+      "ref": "dev",
+      "url": "https://github.com/HaxeFlixel/flixel-ui"
+    },
+    {
       "name": "hxcpp",
       "type": "haxelib",
       "version": null

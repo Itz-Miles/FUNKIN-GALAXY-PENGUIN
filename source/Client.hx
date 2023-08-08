@@ -23,7 +23,6 @@ class Client
 	public static var ratingOffset:Int = 0;
 	public static var hitWindow:Float = 100; // ms
 
-	// Every key has two binds, add your key bind down here and then add your control on options/ControlsSubState.hx and Controls.hx
 	public static var keyBinds:Map<String, Array<FlxKey>> = [
 		// Key Bind, Name for ControlsSubState
 		'note_left' => [D, LEFT],
@@ -47,10 +46,8 @@ class Client
 	public static function loadDefaultKeys()
 	{
 		defaultKeys = keyBinds.copy();
-		// trace(defaultKeys);
 	}
 
-	// i suck at naming things sorry
 	private static var importantMap:Map<String, Array<String>> = [
 		"saveBlackList" => ["keyBinds", "defaultKeys"],
 		"flixelSound" => ["volume", "sound"],
@@ -59,7 +56,6 @@ class Client
 
 	public static function saveSettings()
 	{
-		// i dont really know if i should use set field or set property
 		for (field in Type.getClassFields(Client))
 		{
 			if (Type.typeof(Reflect.field(Client, field)) != TFunction)
@@ -77,7 +73,7 @@ class Client
 		FlxG.save.flush();
 
 		var save:FlxSave = new FlxSave();
-		//save.bind('controls', CoolUtil.getSavePath());
+		save.bind('controls', CoolUtil.getSavePath());
 		save.data.customControls = keyBinds;
 		save.flush();
 		FlxG.log.add("Settings saved!");

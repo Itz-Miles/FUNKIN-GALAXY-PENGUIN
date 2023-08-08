@@ -62,12 +62,12 @@ class TitleState extends MusicBeatState
 
 		Conductor.changeBPM(85);
 
-		bg = new FlxSprite(0, 0).makeGraphic(1280, 720, 0xFF54A4FF);
+		bg = new FlxSprite(0, 0).loadGraphic(EXT.png('space'));
 		bg.origin.set(0, 0);
 		bg.screenCenter();
 		add(bg);
 
-		logoBl = new FlxSprite(20, 20).loadGraphic('assets/images/placeholder logo.png');
+		logoBl = new FlxSprite(20, 20).loadGraphic(EXT.png('placeholder logo'));
 		add(logoBl);
 
 		splashText = new FlxText(80, 590, 600, 'Press Enter to Start', 36);
@@ -118,7 +118,7 @@ class TitleState extends MusicBeatState
 			if (pressedEnter)
 			{
 				FlxG.sound.play(EXT.sound('start'));
-				//splashText.y = 570;
+				// splashText.y = 570;
 				transitioning = true;
 
 				new FlxTimer().start(1, function(tmr:FlxTimer)
@@ -145,7 +145,7 @@ class TitleState extends MusicBeatState
 			FlxTween.tween(logoBl.scale, {x: 1, y: 1}, (60 / Conductor.bpm) * 0.25,
 				{type: FlxTweenType.PERSIST, ease: FlxEase.cubeOut, onComplete: tweenBack});
 
-		//if (titleBF != null)
-			// titleBF.dance();
+		// if (titleBF != null)
+		// titleBF.dance();
 	}
 }

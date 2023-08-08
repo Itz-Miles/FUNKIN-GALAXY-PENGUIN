@@ -102,6 +102,8 @@ class CustomFadeTransition extends MusicBeatSubstate
 			finishCallback();
 			leTween.cancel();
 		}
+		transBlack = null;
+		transGradient = null;
 		super.destroy();
 	}
 }

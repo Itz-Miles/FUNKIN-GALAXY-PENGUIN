@@ -25,7 +25,7 @@ class TitleState extends MusicBeatState
 	var logoBl:FlxSprite;
 	var splashText:FlxText;
 	var bg:FlxSprite;
-	// var titleGF:Character;
+	var titleBF:FlxSprite; //Character;
 	var transitioning:Bool;
 	var gamepad:FlxGamepad;
 	var pressedEnter:Bool;
@@ -62,8 +62,7 @@ class TitleState extends MusicBeatState
 
 		Conductor.changeBPM(85);
 
-		bg = new FlxSprite(0, 0);
-		bg.makeGraphic(1280, 720, 0xFF54A4FF);
+		bg = new FlxSprite(0, 0).makeGraphic(1280, 720, 0xFF54A4FF);
 		bg.origin.set(0, 0);
 		bg.screenCenter();
 		add(bg);
@@ -80,7 +79,8 @@ class TitleState extends MusicBeatState
 		add(splashText);
 		FlxTween.tween(splashText.scale, {x: 0.76, y: 0.76}, (60 / Conductor.bpm) * 0.25, {ease: FlxEase.cubeOut, type: FlxTweenType.PERSIST});
 
-		// titleGF = new Character(758, 219, "titleGF", false, "shared");
+		titleBF = new FlxSprite(840, 80).makeGraphic(300, 440, 0xFFFF3D3D);
+		add(titleBF);
 		// add(titleGF);
 
 		FlxG.camera.flash(FlxColor.WHITE, 1.7);
@@ -91,13 +91,10 @@ class TitleState extends MusicBeatState
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 
-		if (FlxG.keys.justPressed.F)
-		{
-			FlxG.fullscreen = !FlxG.fullscreen;
-		}
-
 		if (FlxG.keys.justPressed.ENTER || controls.ACCEPT)
 			pressedEnter = true;
+
+		titleBF.angle += 80 * elapsed;
 
 		#if mobile
 		for (touch in FlxG.touches.list)

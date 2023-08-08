@@ -62,21 +62,21 @@ class TitleState extends MusicBeatState
 
 		Conductor.changeBPM(85);
 
-		bg = new FlxSprite(0, 0).loadGraphic('');
-		bg.makeGraphic(1280, 720, 0xFF9AC9FF);
+		bg = new FlxSprite(0, 0);
+		bg.makeGraphic(1280, 720, 0xFF54A4FF);
 		bg.origin.set(0, 0);
 		bg.screenCenter();
 		add(bg);
 
-		logoBl = new FlxSprite(-15, -10).makeGraphic(427, 240, 0xffff0000);
+		logoBl = new FlxSprite(20, 20).makeGraphic(700, 480, 0xffbc0000);
 		logoBl.updateHitbox();
 		add(logoBl);
 
-		splashText = new FlxText(0, 560, 0, "Press DFJK to Start", 36);
-		splashText.scrollFactor.set(0, 0);
-		splashText.setFormat('assets/fonts/pop-happiness.otf', 92, FlxColor.WHITE);
-		splashText.updateHitbox();
+		splashText = new FlxText(0, 590, 0, 'Press Enter to Start', 36);
+		splashText.setFormat('assets/fonts/pop-happiness.otf', 92, FlxColor.WHITE, CENTER, SHADOW, FlxColor.BLACK);
 		splashText.screenCenter(X);
+		splashText.borderSize = 2;
+		splashText.shadowOffset.set(0, 5);
 		add(splashText);
 		FlxTween.tween(splashText.scale, {x: 0.76, y: 0.76}, (60 / Conductor.bpm) * 0.25, {ease: FlxEase.cubeOut, type: FlxTweenType.PERSIST});
 
@@ -125,7 +125,7 @@ class TitleState extends MusicBeatState
 			if (pressedEnter)
 			{
 				// FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
-				splashText.y = 570;
+				// splashText.y = 570;
 				transitioning = true;
 
 				new FlxTimer().start(1, function(tmr:FlxTimer)
@@ -149,7 +149,7 @@ class TitleState extends MusicBeatState
 		if (splashText != null)
 			FlxTween.tween(splashText.scale, {x: 0.79, y: 0.79}, (60 / Conductor.bpm) * 0.25, {type: FlxTweenType.PERSIST, ease: FlxEase.cubeOut, onComplete: tweenBack});
 		if (splashText != null)
-			splashText.y = 560; // might tween back later
+			splashText.y = 590; // might tween back later
 		if (logoBl != null)
 			FlxTween.tween(logoBl.scale, {x: 1, y: 1}, (60 / Conductor.bpm) * 0.25, {type: FlxTweenType.PERSIST, ease: FlxEase.cubeOut, onComplete: tweenBack});
 

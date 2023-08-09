@@ -14,10 +14,11 @@ import openfl.display.StageScaleMode;
 import lime.app.Application;
 
 using StringTools;
+
 class Main extends Sprite
 {
 	public static var fpsVar:FPS;
-	
+
 	var game = {
 		width: 1280, // WINDOW width
 		height: 720, // WINDOW height
@@ -60,8 +61,18 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
+		Controls.init();
 		Client.loadDefaultKeys();
 		addChild(new FlxGame(game.width, game.height, game.initialState, game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
+
+		FlxG.game.focusLostFramerate = 60;
+		FlxG.sound.muteKeys = TitleState.muteKeys;
+		FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
+		FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
+		FlxG.keys.preventDefaultKeys = [TAB];
+
+		FlxG.save.bind('funkin', CoolUtil.getSavePath());
+		Client.loadPrefs();
 
 		#if !mobile
 		fpsVar = new FPS(10, 3, 0xFFFFFF);

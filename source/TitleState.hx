@@ -34,30 +34,13 @@ class TitleState extends MusicBeatState
 	{
 		super.create();
 
-		FlxG.game.focusLostFramerate = 60;
-		FlxG.sound.muteKeys = muteKeys;
-		FlxG.sound.volumeDownKeys = volumeDownKeys;
-		FlxG.sound.volumeUpKeys = volumeUpKeys;
-		FlxG.keys.preventDefaultKeys = [TAB];
 		gamepad = FlxG.gamepads.lastActive;
-
-		PlayerSettings.init();
-
-		FlxG.save.bind('funkin', CoolUtil.getSavePath());
-		Client.loadPrefs();
-
-		// Highscore.load();
-
-		if (FlxG.save.data.weekCompleted != null)
-		{
-			// StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
-		}
 
 		if (FlxG.sound.music == null)
 		{
-			FlxG.sound.playMusic(EXT.music('Inst'), 1);
+			FlxG.sound.playMusic(EXT.music('Inst'), 0);
 
-			FlxG.sound.music.fadeIn(4, 0, 0.7);
+			FlxG.sound.music.fadeIn(4, 0, 1);
 		}
 
 		Conductor.changeBPM(85);

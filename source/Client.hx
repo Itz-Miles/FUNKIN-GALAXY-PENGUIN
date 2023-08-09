@@ -3,18 +3,18 @@ package;
 import flixel.FlxG;
 import flixel.util.FlxSave;
 import flixel.input.keyboard.FlxKey;
+import flixel.input.gamepad.FlxGamepadInputID;
+import flixel.graphics.FlxGraphic;
 import Controls;
 
-class Client
+class ClientPrefs
 {
 	public static var downScroll:Bool = false;
 	public static var framerate:Int = 60;
 	public static var showFPS:Bool = true;
 	public static var noteOffset:Int = 0;
 	public static var timeBarType:String = 'Time Left';
-	public static var noReset:Bool = false;
 	public static var hudAlpha:Float = 1;
-	public static var controllerMode:Bool = false;
 	public static var difficulty:String = 'Hard';
 
 	public static var hitsoundVolume:Float = 0;
@@ -23,52 +23,61 @@ class Client
 	public static var ratingOffset:Int = 0;
 	public static var hitWindow:Float = 100; // ms
 
+	// Every key has two binds, add your key bind down here and then add your control on options/ControlsSubState.hx and Controls.hx
 	public static var keyBinds:Map<String, Array<FlxKey>> = [
 		// Key Bind, Name for ControlsSubState
+		'note_up' => [J, UP],
 		'note_left' => [D, LEFT],
 		'note_down' => [F, DOWN],
-		'note_up' => [J, UP],
 		'note_right' => [K, RIGHT],
+		'ui_up' => [W, UP],
 		'ui_left' => [A, LEFT],
 		'ui_down' => [S, DOWN],
-		'ui_up' => [W, UP],
 		'ui_right' => [D, RIGHT],
-		'accept' => [ENTER, NONE],
-		'back' => [BACKSPACE, NONE],
+		'accept' => [SPACE, ENTER],
+		'back' => [BACKSPACE, ESCAPE],
 		'pause' => [ENTER, ESCAPE],
-		'reset' => [R, NONE],
-		'volume_mute' => [ZERO, NONE],
+		'reset' => [R],
+		'volume_mute' => [ZERO],
 		'volume_up' => [NUMPADPLUS, PLUS],
 		'volume_down' => [NUMPADMINUS, MINUS],
+	];
+	public static var gamepadBinds:Map<String, Array<FlxGamepadInputID>> = [
+		'note_up' => [DPAD_UP, LEFT_STICK_DIGITAL_UP, RIGHT_STICK_DIGITAL_UP, Y],
+		'note_left' => [DPAD_LEFT, LEFT_STICK_DIGITAL_LEFT, RIGHT_STICK_DIGITAL_LEFT, X],
+		'note_down' => [DPAD_DOWN, LEFT_STICK_DIGITAL_DOWN, RIGHT_STICK_DIGITAL_DOWN, A],
+		'note_right' => [DPAD_RIGHT, LEFT_STICK_DIGITAL_RIGHT, RIGHT_STICK_DIGITAL_RIGHT, B],
+		'ui_up' => [DPAD_UP, LEFT_STICK_DIGITAL_UP],
+		'ui_left' => [DPAD_LEFT, LEFT_STICK_DIGITAL_LEFT],
+		'ui_down' => [DPAD_DOWN, LEFT_STICK_DIGITAL_DOWN],
+		'ui_right' => [DPAD_RIGHT, LEFT_STICK_DIGITAL_RIGHT],
+		'accept' => [A, START],
+		'back' => [B],
+		'pause' => [START],
+		'reset' => [8]
 	];
 	public static var defaultKeys:Map<String, Array<FlxKey>> = null;
 
 	public static function loadDefaultKeys()
 	{
 		defaultKeys = keyBinds.copy();
+		// trace(defaultKeys);
 	}
-
-	private static var importantMap:Map<String, Array<String>> = [
-		"saveBlackList" => ["keyBinds", "defaultKeys"],
-		"flixelSound" => ["volume", "sound"],
-		"loadBlackList" => ["keyBinds", "defaultKeys"],
-	];
 
 	public static function saveSettings()
 	{
-		for (field in Type.getClassFields(Client))
-		{
-			if (Type.typeof(Reflect.field(Client, field)) != TFunction)
-			{
-				if (!importantMap.get("saveBlackList").contains(field))
-					Reflect.setField(FlxG.save.data, field, Reflect.field(Client, field));
-			}
-		}
+		FlxG.save.data.downScroll = downScroll;
+		FlxG.save.data.framerate = framerate;
+		FlxG.save.data.showFPS = showFPS;
+		FlxG.save.data.noteOffset = noteOffset;
+		FlxG.save.data.timeBarType = timeBarType;
+		FlxG.save.data.hudAlpha = hudAlpha;
 
-		for (flixelS in importantMap.get("flixelSound"))
-		{
-			Reflect.setField(FlxG.save.data, flixelS, Reflect.field(FlxG.sound, flixelS));
-		}
+		FlxG.save.data.difficulty = difficulty;
+		FlxG.save.data.hitsoundVolume = hitsoundVolume;
+		FlxG.save.data.relativeHitCalc = relativeHitCalc;
+		FlxG.save.data.ratingOffset = ratingOffset;
+		FlxG.save.data.hitWindow = hitWindow;
 
 		FlxG.save.flush();
 
@@ -81,42 +90,74 @@ class Client
 
 	public static function loadPrefs()
 	{
-		for (field in Type.getClassFields(Client))
+		if (FlxG.save.data.downScroll != null)
 		{
-			if (Type.typeof(Reflect.field(Client, field)) != TFunction)
+			downScroll = FlxG.save.data.downScroll;
+		}
+
+		if (FlxG.save.data.framerate != null)
+		{
+			framerate = FlxG.save.data.framerate;
+			if (framerate > FlxG.drawFramerate)
 			{
-				if (!importantMap.get("loadBlackList").contains(field))
-				{
-					var defaultValue:Dynamic = Reflect.field(Client, field);
-					var flxProp:Dynamic = Reflect.field(FlxG.save.data, field);
-					Reflect.setField(Client, field, (flxProp != null ? flxProp : defaultValue));
-
-					if (field == "showFPS" && Main.fpsVar != null)
-						Main.fpsVar.visible = showFPS;
-
-					if (field == "framerate")
-					{
-						if (framerate > FlxG.drawFramerate)
-						{
-							FlxG.updateFramerate = framerate;
-							FlxG.drawFramerate = framerate;
-						}
-						else
-						{
-							FlxG.drawFramerate = framerate;
-							FlxG.updateFramerate = framerate;
-						}
-					}
-				}
+				FlxG.updateFramerate = framerate;
+				FlxG.drawFramerate = framerate;
+			}
+			else
+			{
+				FlxG.drawFramerate = framerate;
+				FlxG.updateFramerate = framerate;
 			}
 		}
 
-		for (flixelS in importantMap.get("flixelSound"))
+		if (FlxG.save.data.showFPS != null)
 		{
-			var flxProp:Dynamic = Reflect.field(FlxG.save.data, flixelS);
-			if (flxProp != null)
-				Reflect.setField(FlxG.sound, flixelS, flxProp);
+			showFPS = FlxG.save.data.showFPS;
+			if (Main.fpsVar != null)
+			{
+				Main.fpsVar.visible = showFPS;
+			}
 		}
+
+		if (FlxG.save.data.noteOffset != null)
+		{
+			noteOffset = FlxG.save.data.noteOffset;
+		}
+
+		if (FlxG.save.data.timeBarType != null)
+		{
+			timeBarType = FlxG.save.data.timeBarType;
+		}
+
+		if (FlxG.save.data.hudAlpha != null)
+		{
+			hudAlpha = FlxG.save.data.hudAlpha;
+		}
+
+		if (FlxG.save.data.difficulty != null)
+		{
+			difficulty = FlxG.save.data.difficulty;
+		}
+
+		if (FlxG.save.data.hitsoundVolume != null)
+		{
+			hitsoundVolume = FlxG.save.data.hitsoundVolume;
+		}
+
+		if (FlxG.save.data.relativeHitCalc != null)
+		{
+			relativeHitCalc = FlxG.save.data.relativeHitCalc;
+		}
+
+		if (FlxG.save.data.ratingOffset != null)
+		{
+			ratingOffset = FlxG.save.data.ratingOffset;
+		}
+
+		if (FlxG.save.data.hitWindow != null)
+			{
+				hitWindow = FlxG.save.data.hitWindow;
+			}
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls', CoolUtil.getSavePath());
@@ -133,32 +174,11 @@ class Client
 
 	public static function reloadControls()
 	{
-		PlayerSettings.player1.controls.setKeyboardScheme(KeyboardScheme.Solo);
-
-		TitleState.muteKeys = copyKey(keyBinds.get('volume_mute'));
-		TitleState.volumeDownKeys = copyKey(keyBinds.get('volume_down'));
-		TitleState.volumeUpKeys = copyKey(keyBinds.get('volume_up'));
+		TitleState.muteKeys = keyBinds.get('volume_mute').copy();
+		TitleState.volumeDownKeys = keyBinds.get('volume_down').copy();
+		TitleState.volumeUpKeys = keyBinds.get('volume_up').copy();
 		FlxG.sound.muteKeys = TitleState.muteKeys;
 		FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
 		FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
-	}
-
-	public static function copyKey(arrayToCopy:Array<FlxKey>):Array<FlxKey>
-	{
-		var copiedArray:Array<FlxKey> = arrayToCopy.copy();
-		var i:Int = 0;
-		var len:Int = copiedArray.length;
-
-		while (i < len)
-		{
-			if (copiedArray[i] == NONE)
-			{
-				copiedArray.remove(NONE);
-				--i;
-			}
-			i++;
-			len = copiedArray.length;
-		}
-		return copiedArray;
 	}
 }

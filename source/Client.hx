@@ -7,7 +7,7 @@ import flixel.input.gamepad.FlxGamepadInputID;
 import flixel.graphics.FlxGraphic;
 import Controls;
 
-class ClientPrefs
+class Client
 {
 	public static var downScroll:Bool = false;
 	public static var framerate:Int = 60;

@@ -15,10 +15,13 @@ class MusicBeatState extends FlxUIState
 
 	private var curDecStep:Float = 0;
 	private var curDecBeat:Float = 0;
-	private var controls(get, never):Controls;
 
-	inline function get_controls():Controls
-		return PlayerSettings.player1.controls;
+	public var controls(get, never):Controls;
+
+	private function get_controls()
+	{
+		return Controls.instance;
+	}
 
 	override function create()
 	{
@@ -83,18 +86,18 @@ class MusicBeatState extends FlxUIState
 		curSection = 0;
 		stepsToDo = 0;
 		/*
-		for (i in 0...PlayState.SONG.notes.length)
-		{
-			if (PlayState.SONG.notes[i] != null)
+			for (i in 0...PlayState.SONG.notes.length)
 			{
-				stepsToDo += Math.round(getBeatsOnSection() * 4);
-				if (stepsToDo > curStep)
-					break;
+				if (PlayState.SONG.notes[i] != null)
+				{
+					stepsToDo += Math.round(getBeatsOnSection() * 4);
+					if (stepsToDo > curStep)
+						break;
 
-				curSection++;
+					curSection++;
+				}
 			}
-		}
-		*/
+		 */
 
 		if (curSection > lastSection)
 			sectionHit();
@@ -175,13 +178,14 @@ class MusicBeatState extends FlxUIState
 	{
 		// trace('Section: ' + curSection + ', Beat: ' + curBeat + ', Step: ' + curStep);
 	}
+
 	function getBeatsOnSection()
 	{
 		var val:Null<Float> = 4;
 		/*
-		if (PlayState.SONG != null && PlayState.SONG.notes[curSection] != null)
-			val = PlayState.SONG.notes[curSection].sectionBeats;
-		*/
+			if (PlayState.SONG != null && PlayState.SONG.notes[curSection] != null)
+				val = PlayState.SONG.notes[curSection].sectionBeats;
+		 */
 		return val == null ? 4 : val;
 	}
 }

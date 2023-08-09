@@ -141,17 +141,7 @@ class CoolUtil
 		}
 		return dumbArray;
 	}
-/*
-	public static function precacheSound(sound:String, ?library:String = null):Void
-	{
-		Paths.sound(sound, library);
-	}
-
-	public static function precacheMusic(sound:String, ?library:String = null):Void
-	{
-		Paths.music(sound, library);
-	}
-*/
+	
 	public static function browserLoad(site:String)
 	{
 		#if linux
@@ -159,28 +149,6 @@ class CoolUtil
 		#else
 		FlxG.openURL(site);
 		#end
-	}
-
-	public static function userName():String
-	{
-		var userName:String = "joe";
-		/*
-			#if (sys != null) // Check if running on desktop
-			{
-				userName = sys.User.getCurrentUserName();
-			}
-			#elseif (js != null) // Check if running in JavaScript
-			{
-				userName = js.Browser.window.navigator.userAgent;
-			}
-			#elseif (neko != null) // Check if running on Neko
-			{
-				userName = neko.Sys.getEnv("USER");
-			}
-			#end
-			trace("Current user's name: " + userName);
-		 */
-		return userName;
 	}
 
 	public static function getSavePath(folder:String = 'Itz_Miles'):String

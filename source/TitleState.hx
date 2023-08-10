@@ -25,7 +25,7 @@ class TitleState extends MusicBeatState
 	var logoBl:FlxSprite;
 	var splashText:FlxText;
 	var bg:FlxSprite;
-	var titleBF:FlxSprite; // Character;
+	var titleBF:FlxSprite;
 	var transitioning:Bool;
 	var gamepad:FlxGamepad;
 	var pressedEnter:Bool;
@@ -50,17 +50,22 @@ class TitleState extends MusicBeatState
 		bg.screenCenter();
 		add(bg);
 
-		logoBl = new FlxSprite(20, 20).loadGraphic(EXT.png('placeholder logo'));
+		logoBl = new FlxSprite(520, -520).loadGraphic(EXT.png('placeholder logo'));
 		add(logoBl);
+		FlxTween.tween(logoBl, {x: 20, y: 20}, (60 / Conductor.bpm), {ease: FlxEase.cubeInOut, type: FlxTweenType.PERSIST});
 
-		splashText = new FlxText(80, 590, 600, 'Press Enter to Start', 36);
+		splashText = new FlxText(580, 1090, 600, 'Press Enter to Start', 36);
 		splashText.setFormat('assets/fonts/pop-happiness.otf', 52, FlxColor.WHITE, CENTER, SHADOW, FlxColor.BLACK);
 		splashText.borderSize = 2;
 		splashText.shadowOffset.set(0, 3);
 		add(splashText);
+		FlxTween.tween(splashText, {x: 80, y: 590}, (60 / Conductor.bpm), {ease: FlxEase.cubeInOut, type: FlxTweenType.PERSIST});
 
-		titleBF = new FlxSprite(840, 80).makeGraphic(300, 440, 0xFFFF3D3D);
+		titleBF = new FlxSprite(1580, 80).loadGraphic(EXT.png('bf woah still'));
+		titleBF.origin.x += 20;
+		titleBF.scale.set(1.5, 1.5);
 		add(titleBF);
+		FlxTween.tween(titleBF, {x: 780, y: 180, "scale.x":1.0, "scale.y":1.0}, (60 / Conductor.bpm) * 2, {ease: FlxEase.cubeInOut, type: FlxTweenType.PERSIST});
 
 		FlxG.camera.flash(FlxColor.WHITE, 1.7);
 	}
@@ -100,13 +105,20 @@ class TitleState extends MusicBeatState
 		{
 			if (pressedEnter)
 			{
-				FlxG.sound.play(EXT.sound('start'));
-				// splashText.y = 570;
 				transitioning = true;
+				FlxG.sound.play(EXT.sound('start'));
 
-				new FlxTimer().start(1, function(tmr:FlxTimer)
+				FlxTween.tween(logoBl, {x: -500, y: -500}, (60 / Conductor.bpm), {ease: FlxEase.quadIn, type: FlxTweenType.PERSIST});
+				FlxTween.tween(splashText, {x: -500, y: FlxG.height + 500}, (60 / Conductor.bpm), {ease: FlxEase.quadIn, type: FlxTweenType.PERSIST});
+
+				new FlxTimer().start((60 / Conductor.bpm) * 0.5, function(tmr:FlxTimer)
 				{
-					MusicBeatState.resetState();
+					FlxG.camera.fade(FlxColor.WHITE, (60 / Conductor.bpm) * 2);
+					FlxTween.tween(titleBF, {x: -500, y: 350, "scale.x":0.5, "scale.y":0.5}, (60 / Conductor.bpm) * 2, {ease: FlxEase.cubeIn, type: FlxTweenType.PERSIST});
+					new FlxTimer().start((60 / Conductor.bpm) * 2, function(tmr:FlxTimer)
+					{
+						MusicBeatState.resetState(0.1);
+					});
 				});
 			}
 		}

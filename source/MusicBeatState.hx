@@ -5,7 +5,7 @@ import flixel.addons.ui.FlxUIState;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.FlxState;
 
-class MusicBeatState extends FlxUIState
+class MusicBeatState extends FlxTransitionableState
 {
 	private var curSection:Int = 0;
 	private var stepsToDo:Int = 0;

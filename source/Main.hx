@@ -30,7 +30,7 @@ class Main extends Sprite
 
 	public static function main():Void
 	{
-		trace("Welcome to Haxe!");
+		trace("Welcome to Haxe!"); //not really but whatever
 		Lib.current.addChild(new Main());
 	}
 

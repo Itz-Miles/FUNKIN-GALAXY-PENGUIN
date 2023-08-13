@@ -66,7 +66,13 @@ class TitleState extends MusicBeatState
 		titleBF.scale.set(1.5, 1.5);
 		add(titleBF);
 		titleBF.angle = Std.random(361);
-		FlxTween.tween(titleBF, {x: 780, y: 180, "scale.x":1.0, "scale.y":1.0}, (60 / Conductor.bpm) * 2, {ease: FlxEase.cubeInOut, type: FlxTweenType.PERSIST});
+		FlxTween.tween(titleBF, {
+			x: 780,
+			y: 180,
+			"scale.x": 1.0,
+			"scale.y": 1.0
+		}, (60 / Conductor.bpm) * 2,
+			{ease: FlxEase.cubeInOut, type: FlxTweenType.PERSIST});
 
 		FlxG.camera.flash(FlxColor.WHITE, 1.7);
 	}
@@ -115,7 +121,12 @@ class TitleState extends MusicBeatState
 				new FlxTimer().start((60 / Conductor.bpm) * 0.5, function(tmr:FlxTimer)
 				{
 					FlxG.camera.fade(FlxColor.WHITE, (60 / Conductor.bpm) * 2);
-					FlxTween.tween(titleBF, {x: -500, y: 350, "scale.x":0.5, "scale.y":0.5}, (60 / Conductor.bpm) * 2, {ease: FlxEase.cubeIn, type: FlxTweenType.PERSIST});
+					FlxTween.tween(titleBF, {
+						x: -500,
+						y: 350,
+						"scale.x": 0.5,
+						"scale.y": 0.5
+					}, (60 / Conductor.bpm) * 2, {ease: FlxEase.cubeIn, type: FlxTweenType.PERSIST});
 					new FlxTimer().start((60 / Conductor.bpm) * 2, function(tmr:FlxTimer)
 					{
 						FlxG.resetState();
@@ -140,5 +151,15 @@ class TitleState extends MusicBeatState
 		if (logoBl != null)
 			FlxTween.tween(logoBl.scale, {x: 1, y: 1}, (60 / Conductor.bpm) * 0.25,
 				{type: FlxTweenType.PERSIST, ease: FlxEase.cubeOut, onComplete: tweenBack});
+	}
+
+	override public function destroy()
+	{
+		//super.destroy();
+		logoBl = null;
+		splashText = null;
+		bg = null;
+		titleBF = null;
+		gamepad = null;
 	}
 }

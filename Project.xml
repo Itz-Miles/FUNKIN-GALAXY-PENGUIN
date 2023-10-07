@@ -80,7 +80,7 @@
 	<!-- ____________________ Errors ____________________ -->
 
 	<error value="Seems like you're using Haxe ${haxe}
-	see https://haxe.org/download for 4.3.1" if="${haxe != 4.3.1}"/>
+	see https://haxe.org/download for 4.3.2" if="${haxe != 4.3.2}"/>
 
 	<error value="Seems like you're using flixel ${flixel}
 	run `haxelib run hmm install` for 5.3.1" if="${flixel != 5.3.1}"/>

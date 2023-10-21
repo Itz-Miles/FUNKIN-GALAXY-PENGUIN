@@ -32,24 +32,25 @@
         .top-bar {
             top: 0;
             background: linear-gradient(#0114EE, #5EBDEA);
+            text-shadow: rgb(0, 19, 56) 0px 5px 6px;
         }
 
         .bottom-bar {
             background: linear-gradient(#5EBDEA, #0114EE);
             bottom: 0;
             line-height: 64px;
-            font-size: 32px;
             color: black;
         }
 
         .button {
             display: inline-block;
             padding: 0px 20px 0px 20px;
-            font-size: 24px;
+            font-size: 32px;
             border-radius: 32px;
-            border: 8px solid #89FFEA;
-            background: linear-gradient(to bottom, white, rgb(155, 192, 205));
-            
+            border: 6px solid #8AFFEB;
+            background: linear-gradient(to bottom, #f2fbff, #67BFE8);
+            box-shadow:
+                inset #0068adaa 0 0 4px 3px;
             text-decoration: none;
             color: black;
         }
@@ -88,7 +89,8 @@
 <body>
     <div class="cinematic-bar top-bar">Welcome to the Galaxy!</div>
     <img src="https://static.wikia.nocookie.net/mario/images/7/77/Power_Star_SMG.png" alt="Rotating Star" class="star">
-    <div class="cinematic-bar bottom-bar"><div class="button">Visits to Loopdeeswoop: 1,000,000</div>
+    <div class="cinematic-bar bottom-bar">
+        <div class="button">Visits to Loopdeeswoop: 1,000,000</div>
     </div>
 </body>
 

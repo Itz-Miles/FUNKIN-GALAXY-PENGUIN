@@ -61,17 +61,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            animation: rotation 5s infinite linear;
-        }
-
-        @keyframes rotation {
-            from {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-
-            to {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
+            cursor: pointer;
         }
 
         @font-face {
@@ -88,10 +78,50 @@
 
 <body>
     <div class="cinematic-bar top-bar">Welcome to the Galaxy!</div>
-    <img src="https://static.wikia.nocookie.net/mario/images/7/77/Power_Star_SMG.png" alt="Rotating Star" class="star">
+    <img src="https://static.wikia.nocookie.net/mario/images/7/77/Power_Star_SMG.png" width="300px" alt="Rotating Star"
+        class="star" id="spinnableStar">
     <div class="cinematic-bar bottom-bar">
         <div class="button">Visits to Loopdeeswoop: 1,000,000</div>
     </div>
+    <script>
+        const star = document.getElementById('spinnableStar');
+        let isHovered = false;
+        let currentRotation = 0;
+        let lastMouseX = 0;
+        let rotationSpeed = 0;
+
+        star.addEventListener('mouseenter', () => {
+            isHovered = true;
+        });
+
+        star.addEventListener('mouseleave', () => {
+            isHovered = false;
+        });
+
+        star.addEventListener('mousemove', (event) => {
+            if (isHovered) {
+                const mouseX = event.clientX;
+                rotationSpeed = (mouseX - lastMouseX) / 10;
+                currentRotation += rotationSpeed;
+                star.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
+                lastMouseX = mouseX;
+            }
+        });
+
+        star.addEventListener('mouseleave', () => {
+            isHovered = false;
+            decelerateRotation();
+        });
+
+        function decelerateRotation() {
+            if (Math.abs(rotationSpeed) > 0.45) {
+                rotationSpeed *= 0.985;
+            }
+            currentRotation += rotationSpeed;
+            star.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
+            requestAnimationFrame(decelerateRotation);
+        }
+    </script>
 </body>
 
 </html>

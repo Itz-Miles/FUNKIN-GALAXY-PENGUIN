@@ -121,11 +121,11 @@
         });
 
         function decelerateRotation() {
-            if (Math.abs(rotationSpeed) > 0.45) {
-                rotationSpeed *= 0.99;
+            if (Math.abs(rotationSpeed) > 0.5) {
+                rotationSpeed *= 0.985;
+            }
                 star.style.transform = `translate(-50%, -50%) rotate(${rotationSpeed + parseFloat(star.style.transform.split('rotate(')[1]) || 0}deg)`;
                 decelerationTimer = setTimeout(decelerateRotation, 1000 / 60); // Approx. 60 FPS
-            }
         }
     </script>
 </body>

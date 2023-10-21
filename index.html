@@ -86,25 +86,14 @@
     <script>
         const star = document.getElementById('spinnableStar');
         let isHovered = false;
-        let currentRotation = 0;
-        let lastMouseX = 0;
+        let previousAngle = 0;
         let rotationSpeed = 0;
+        let decelerationTimer = null;
 
         star.addEventListener('mouseenter', () => {
             isHovered = true;
-        });
-
-        star.addEventListener('mouseleave', () => {
-            isHovered = false;
-        });
-
-        star.addEventListener('mousemove', (event) => {
-            if (isHovered) {
-                const mouseX = event.clientX;
-                rotationSpeed = (mouseX - lastMouseX) / 10;
-                currentRotation += rotationSpeed;
-                star.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
-                lastMouseX = mouseX;
+            if (decelerationTimer) {
+                clearInterval(decelerationTimer);
             }
         });
 
@@ -113,13 +102,30 @@
             decelerateRotation();
         });
 
+        star.addEventListener('mousemove', (event) => {
+            if (isHovered) {
+                const mouseX = event.clientX;
+                const mouseY = event.clientY;
+
+                const starRect = star.getBoundingClientRect();
+                const starCenterX = starRect.left + starRect.width / 2;
+                const starCenterY = starRect.top + starRect.height / 2;
+
+                const angle = Math.atan2(mouseY - starCenterY, mouseX - starCenterX);
+                const angularSpeed = (angle - previousAngle) * 180 / Math.PI;
+                rotationSpeed = angularSpeed;
+                star.style.transform = `translate(-50%, -50%) rotate(${rotationSpeed + parseFloat(star.style.transform.split('rotate(')[1]) || 0}deg)`;
+
+                previousAngle = angle;
+            }
+        });
+
         function decelerateRotation() {
             if (Math.abs(rotationSpeed) > 0.45) {
-                rotationSpeed *= 0.985;
+                rotationSpeed *= 0.99;
+                star.style.transform = `translate(-50%, -50%) rotate(${rotationSpeed + parseFloat(star.style.transform.split('rotate(')[1]) || 0}deg)`;
+                decelerationTimer = setTimeout(decelerateRotation, 1000 / 60); // Approx. 60 FPS
             }
-            currentRotation += rotationSpeed;
-            star.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
-            requestAnimationFrame(decelerateRotation);
         }
     </script>
 </body>

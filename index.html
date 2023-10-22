@@ -33,12 +33,18 @@
 
         .top-bar {
             top: 0;
-            background: linear-gradient(#0114EE, #5EBDEA);
             text-shadow: rgb(0, 19, 56) 0px 5px 6px;
+            background: linear-gradient(#0115f4a5, #114cfeb4, #5ebce5e6);
+            box-shadow: 0 4px 30px rgb(0, 179, 255);
+            backdrop-filter: blur(1.2px);
+            -webkit-backdrop-filter: blur(1.2px);
         }
 
         .bottom-bar {
-            background: linear-gradient(#5EBDEA, #0114EE);
+            background: linear-gradient(#5ebce5e6, #114cfeb4, #0115f4a5);
+            box-shadow: 0 4px 30px rgb(0, 179, 255);
+            backdrop-filter: blur(1.2px);
+            -webkit-backdrop-filter: blur(1.2px);
             bottom: 0;
             line-height: 64px;
             color: black;
@@ -126,8 +132,8 @@
             if (Math.abs(rotationSpeed) > 0.5) {
                 rotationSpeed *= 0.985;
             }
-                star.style.transform = `translate(-50%, -50%) rotate(${rotationSpeed + parseFloat(star.style.transform.split('rotate(')[1]) || 0}deg)`;
-                decelerationTimer = setTimeout(decelerateRotation, 1000 / 60); // Approx. 60 FPS
+            star.style.transform = `translate(-50%, -50%) rotate(${rotationSpeed + parseFloat(star.style.transform.split('rotate(')[1]) || 0}deg)`;
+            decelerationTimer = setTimeout(decelerateRotation, 1000 / 60); // Approx. 60 FPS
         }
     </script>
 </body>

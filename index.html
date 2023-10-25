@@ -91,10 +91,36 @@
             height: 100%;
             background-color: rgb(255, 255, 255);
             opacity: 1;
-            
+
             z-index: 10;
             transition: opacity 3s ease;
         }
+
+        .rotating-background {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 120vw;
+            height: 120vw;
+            background-image: url('radical.svg');
+            background-size: cover;
+            background-position: center;
+            animation: rotateBackground 20s linear infinite;
+            opacity: 0.1;
+            transform: translate(-50%, -50%);
+            filter: invert(1) blur(7px);
+        }
+
+        @keyframes rotateBackground {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
 
         @font-face {
             font-family: 'FOT Pop Happiness Std Stripped';
@@ -109,6 +135,7 @@
 </head>
 
 <body>
+    <div class="rotating-background"></div>
     <img src="https://mario.wiki.gallery/images/f/ff/PowerstarSMG.png" width="300px" alt="Rotating Star" class="star"
         id="spinnableStar">
     <div class="cinematic-bar top-bar">Welcome to the Galaxy!</div>
@@ -168,7 +195,7 @@
 
 
         window.addEventListener('load', function () {
-        
+
             const overlay = document.getElementById('overlay');
 
             overlay.style.opacity = 0;

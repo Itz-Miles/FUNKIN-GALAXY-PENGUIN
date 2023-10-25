@@ -23,21 +23,25 @@
             padding: 5px 0;
         }
 
-        .cinematic-bar {
+        .cinematic-bar,
+        .top-bar,
+        .bottom-bar {
             position: fixed;
             width: 100%;
+        }
+
+        .cinematic-bar {
             height: 64px;
-            color: #ffffff;
-            text-align: center;
-            line-height: 48px;
+            line-height: 64px;
             font: 48px "FOT Pop Happiness Std Stripped";
+            color: #fff;
+            text-align: center;
         }
 
         .top-bar {
             top: 0;
-            padding-top: 0px;
-            padding-bottom: 40px;
-            text-shadow: 0px 5px 6px #001338;
+            padding: 0 0 40px;
+            text-shadow: 0 5px 6px #001338;
             background: linear-gradient(#0115f484, #114cfe97, #5ebce5cf);
             box-shadow: 0 4px 30px #00b3ff;
             backdrop-filter: blur(1.2px);
@@ -46,14 +50,13 @@
 
         .bottom-bar {
             bottom: 0;
-            padding-top: 30px;
-            padding-bottom: 30px;
+            padding: 30px 0;
             background: linear-gradient(#5ebce5cf, #114cfe97, #0115f484);
             box-shadow: 0 4px 30px #00b3ff;
             backdrop-filter: blur(1.2px);
             -webkit-backdrop-filter: blur(1.2px);
             line-height: 64px;
-            color: #000000;
+            color: #000;
         }
 
         .button {

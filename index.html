@@ -134,7 +134,7 @@
 
 <body>
     <div class="rotating-background"></div>
-    <a href="game/play.html"><img src="https://mario.wiki.gallery/images/f/ff/PowerstarSMG.png" width="300px" alt="Rotating Star" class="star"
+    <a href="game/play.html" id="play"><img src="https://mario.wiki.gallery/images/f/ff/PowerstarSMG.png" width="220px" alt="Rotating Star" class="star"
         id="spinnableStar"></a>
     <div class="cinematic-bar top-bar">Welcome to the Galaxy!</div>
     <div class="cinematic-bar bottom-bar">
@@ -146,13 +146,15 @@
     <div class="fade-in-overlay" id="overlay"></div>
     <script>
         const star = document.getElementById('spinnableStar');
+        const link = document.getElementById('play');
         let isHovered = false;
         let previousAngle = 0;
-        let rotationSpeed = 40;
+        let rotationSpeed = -40;
         let decelerationTimer = null;
         decelerateRotation();
 
         star.addEventListener('mouseenter', () => {
+            star.width = 300;
             isHovered = true;
             if (decelerationTimer) {
                 clearInterval(decelerationTimer);
@@ -161,6 +163,7 @@
 
         star.addEventListener('mouseleave', () => {
             isHovered = false;
+            star.width = 220;
             decelerateRotation();
         });
 

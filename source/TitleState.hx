@@ -38,12 +38,12 @@ class TitleState extends MusicBeatState
 
 		if (FlxG.sound.music == null)
 		{
-			FlxG.sound.playMusic(EXT.music('Inst'), 0);
+			FlxG.sound.playMusic(EXT.music('title'), 0);
 
 			FlxG.sound.music.fadeIn(4, 0, 1);
 		}
 
-		Conductor.changeBPM(85);
+		Conductor.changeBPM(72);
 
 		bg = new FlxSprite(0, 0).loadGraphic(EXT.png('space'));
 		bg.origin.set(0, 0);
@@ -79,7 +79,7 @@ class TitleState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		titleBF.angle += 80 * elapsed;
+		titleBF.angle += 68 * elapsed;
 
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;

@@ -56,7 +56,7 @@
             backdrop-filter: blur(1.2px);
             -webkit-backdrop-filter: blur(1.2px);
             line-height: 64px;
-            color: #000;
+                        color: #000;
         }
 
         .button {
@@ -111,11 +111,11 @@
 
         @keyframes rotateBackground {
             from {
-                transform: translate(-50%, -50%) rotate(0deg);
+                transform: translate(-50%, -50%) rotate(360deg);
             }
 
             to {
-                transform: translate(-50%, -50%) rotate(360deg);
+                transform: translate(-50%, -50%) rotate(0deg);
             }
         }
 
@@ -149,7 +149,7 @@
         const link = document.getElementById('play');
         let isHovered = false;
         let previousAngle = 0;
-        let rotationSpeed = -40;
+        let rotationSpeed = 40;
         let decelerationTimer = null;
         decelerateRotation();
 

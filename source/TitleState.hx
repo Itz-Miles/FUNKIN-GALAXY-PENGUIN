@@ -115,8 +115,8 @@ class TitleState extends MusicBeatState
 				transitioning = true;
 				FlxG.sound.play(EXT.sound('start'));
 
-				FlxTween.tween(logoBl, {x: -500, y: -500}, (60 / Conductor.bpm), {ease: FlxEase.quadIn, type: FlxTweenType.PERSIST});
-				FlxTween.tween(splashText, {x: -500, y: FlxG.height + 500}, (60 / Conductor.bpm), {ease: FlxEase.quadIn, type: FlxTweenType.PERSIST});
+				FlxTween.tween(logoBl, {x: -500, y: -552}, (60 / Conductor.bpm), {ease: FlxEase.quadIn, type: FlxTweenType.PERSIST});
+				FlxTween.tween(splashText, {x: -500, y: FlxG.height + 552}, (60 / Conductor.bpm), {ease: FlxEase.quadIn, type: FlxTweenType.PERSIST});
 
 				new FlxTimer().start((60 / Conductor.bpm) * 0.5, function(tmr:FlxTimer)
 				{

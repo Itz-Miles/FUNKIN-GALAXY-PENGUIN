@@ -1,2 +1,165 @@
-the mod is coming soon!<br>
-<a href="../index.html">click this link to go back</a>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Funkin' Galaxy Penguin - Coming Soon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Consolas', monospace;
+            background-color: #131313;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .editor {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: calc(50% - 20px);
+            height: calc(100% - 20px);
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .editor-header {
+            background-color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .editor-header {
+            background-color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .search-panel {
+            background-color: #444;
+            color: #DDD;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin: 0;
+            margin: 0 auto;
+        }
+
+        .editor-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: calc(100% - 20px);
+            padding: 20px;
+        }
+
+        pre {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #DDD;
+        }
+
+        .glowing-text {
+            color: #00FF00;
+            text-shadow: 0 0 5px #00FF00, 0 0 10px #00FF00, 0 0 15px #00FF00;
+        }
+
+        .editor-footer {
+            background-color: #333;
+            padding: 10px;
+        }
+
+        .cursor {
+            width: 5px;
+            height: 20px;
+            background-color: #00FF00;
+            animation: blink 1s infinite;
+        }
+
+        .message {
+            text-align: center;
+            color: #FFF;
+            width: 50%;
+            max-width: 50%;
+            height: 100%;
+            margin: 10px auto;
+        }
+
+        .glowing-box {
+            box-shadow: 0 0 30px #ffffff, 0 0 50px #cdcdcd, 0 0 70px #4f4f4f;
+            display: inline-block;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 7rem;
+            margin-top: 15%;
+            text-shadow: 0 0 16px #FFF;
+        }
+
+        a {
+            color: #00FF00;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: #33FF33;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="editor">
+            <div class="editor-header">
+                <div class="search-panel">🔎FUNKIN-GALAXY-PENGUIN-site</div>
+                <div class="close-button"></div>
+                <div class="minimize-button"></div>
+                <div class="maximize-button"></div>
+            </div>
+            <div class="editor-content">
+                <pre><code class="glowing-text">
+██╗  ██╗███████╗ ██████╗ ██████╗ ████████╗
+██║ ██╔╝██╔════╝██╔═══██╗██╔══██╗╚══██╔══╝
+█████╔╝ ███████╗██████╔╝██████╔╝   ██║   
+██╔═██╗ ╚════██║██╔══██╗██╔══██╗   ██║   
+██║  ██╗███████║██████╔╝██████╔╝   ██║    ██║    ██║
+╚═╝  ╚═╝╚══════╝╚═════╝ ╚═════╝    ╚═╝    ╚═╝    ╚═╝
+</code></pre>
+                <div class="editor-footer">
+                    <div class="cursor"></div>
+                </div>
+            </div>
+        </div>
+        <div class="message">
+            <h1>
+                <div class="glowing-box">Hold it!</div>
+            </h1>
+            <p>Funkin' Galaxy Penguin isn't done yet!<br>Check for updates on Miles' Twitter:<br><a
+                    href="https://twitter.com/Itz_MilesDev" target="_blank">@Itz_MilesDev</a></p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -129,7 +129,7 @@ class TitleState extends MusicBeatState
 					}, (60 / Conductor.bpm) * 2, {ease: FlxEase.cubeIn, type: FlxTweenType.PERSIST});
 					new FlxTimer().start((60 / Conductor.bpm) * 2, function(tmr:FlxTimer)
 					{
-						FlxG.resetState();
+						FlxG.switchState(new CreditsState());
 					});
 				});
 			}

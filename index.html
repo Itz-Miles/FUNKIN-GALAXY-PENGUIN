@@ -77,12 +77,10 @@
             border-radius: 32px;
             border: 6px solid #8AFFEB;
             background: linear-gradient(to bottom, #f2fbff, #67BFE8);
-            box-shadow:
-                inset #0068adaa 0 0 4px 3px;
+            box-shadow: inset #0068adaa 0 0 4px 3px;
             text-decoration: none;
             color: #000000;
         }
-
 
         .star {
             position: absolute;
@@ -100,7 +98,6 @@
             height: 100%;
             background-color: rgb(255, 255, 255);
             opacity: 1;
-
             z-index: 10;
             transition: opacity 3s ease;
         }
@@ -130,7 +127,6 @@
             }
         }
 
-
         @font-face {
             font-family: 'FOT Pop Happiness Std Stripped';
             src: local('FOT Pop Happiness Std Stripped ExtraBold'), local('FOTPopHappinessStrp-ExtraBold'),
@@ -139,6 +135,18 @@
             font-weight: bold;
             font-style: normal;
             font-display: swap;
+        }
+
+        .speech-bubble {
+            position: absolute;
+            background-color: #00a2ff;
+            padding: 10px;
+            border-radius: 16px;
+            color: #fff;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.6);
+            display: none;
+            vertical-align: middle;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -155,9 +163,11 @@
         ©It'z_Miles 2023 - Not Approved by or associated with Nintendo
     </div>
     <div class="fade-in-overlay" id="overlay"></div>
+    <div class="speech-bubble" id="speechBubble"><img src ="./game/assets/images/placeholder logo.png" height="72px"></div>
     <script>
         const star = document.getElementById('spinnableStar');
         const link = document.getElementById('play');
+        const speechBubble = document.getElementById('speechBubble');
         let isHovered = false;
         let previousAngle = 0;
         let rotationSpeed = 40;
@@ -167,6 +177,7 @@
         star.addEventListener('mouseenter', () => {
             star.width = 300;
             isHovered = true;
+            speechBubble.style.display = 'inline-block';
             if (decelerationTimer) {
                 clearInterval(decelerationTimer);
             }
@@ -175,6 +186,7 @@
         star.addEventListener('mouseleave', () => {
             isHovered = false;
             star.width = 220;
+            speechBubble.style.display = 'none';
             decelerateRotation();
         });
 
@@ -193,6 +205,8 @@
                 star.style.transform = `translate(-50%, -50%) rotate(${rotationSpeed + parseFloat(star.style.transform.split('rotate(')[1]) || 0}deg)`;
 
                 previousAngle = angle;
+                speechBubble.style.left = mouseX + 10 + 'px';
+                speechBubble.style.top = mouseY - 96 + 'px';
             }
         });
 
@@ -204,10 +218,7 @@
             decelerationTimer = setTimeout(decelerateRotation, 1000 / 60);
         }
 
-
-
         window.addEventListener('load', function () {
-
             const overlay = document.getElementById('overlay');
 
             overlay.style.opacity = 0;

@@ -17,9 +17,12 @@ using StringTools;
 
 class CreditsState extends MusicBeatState
 {
-    var wall:FlxSprite;
+	var wall:FlxSprite;
 	var floor:FlxSprite;
+	var credits:Array<String>;
+	var creditItems:Array<String>;
 	var curtains:FlxSprite;
+
 	override public function create():Void
 	{
 		super.create();
@@ -48,7 +51,12 @@ class CreditsState extends MusicBeatState
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 		if (controls.BACK)
-			FlxG.switchState(new TitleState());
+		{
+			FlxG.camera.fade(FlxColor.WHITE, 0.35, false, function()
+			{
+				FlxG.switchState(new TitleState());
+			});
+		}
 		super.update(elapsed);
 	}
 
@@ -59,7 +67,11 @@ class CreditsState extends MusicBeatState
 
 	override public function destroy()
 	{
-		wall = null;
 		super.destroy();
+		wall = null;
+		floor = null;
+		curtains = null;
+		credits = null;
+		creditItems = null;
 	}
 }

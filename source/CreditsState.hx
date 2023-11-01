@@ -17,6 +17,9 @@ using StringTools;
 
 class CreditsState extends MusicBeatState
 {
+    var wall:FlxSprite;
+	var floor:FlxSprite;
+	var curtains:FlxSprite;
 	override public function create():Void
 	{
 		super.create();
@@ -30,8 +33,12 @@ class CreditsState extends MusicBeatState
 
 		Conductor.changeBPM(72);
 
-		var wall:FlxSprite = new FlxSprite(0, 0).loadGraphic(EXT.png('wall'));
+		wall = new FlxSprite(0, 0).loadGraphic(EXT.png('wall'));
 		add(wall);
+		floor = new FlxSprite(0, 429).loadGraphic(EXT.png('floor'));
+		add(floor);
+		curtains = new FlxSprite(0, 0).loadGraphic(EXT.png('curtains'));
+		add(curtains);
 
 		FlxG.camera.flash(FlxColor.WHITE, 1.7);
 	}
@@ -40,8 +47,8 @@ class CreditsState extends MusicBeatState
 	{
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
-		if (Controls.BACK)
-			FlxG.switchState(new CreditsState());
+		if (controls.BACK)
+			FlxG.switchState(new TitleState());
 		super.update(elapsed);
 	}
 

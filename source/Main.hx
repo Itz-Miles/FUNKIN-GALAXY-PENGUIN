@@ -30,7 +30,7 @@ class Main extends Sprite
 
 	public static function main():Void
 	{
-		trace("Welcome to Haxe!"); //not really but whatever
+		trace("Welcome to Haxe!");
 		Lib.current.addChild(new Main());
 	}
 
@@ -64,7 +64,7 @@ class Main extends Sprite
 		Controls.init();
 		Client.loadDefaultKeys();
 		addChild(new FlxGame(game.width, game.height, game.initialState, game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
-
+		trace("welcome to the Galaxy!");
 		FlxG.game.focusLostFramerate = 60;
 		FlxG.sound.muteKeys = TitleState.muteKeys;
 		FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;

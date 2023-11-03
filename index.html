@@ -23,141 +23,141 @@
         content="https://itz-miles.github.io/FUNKIN-GALAXY-PENGUIN-site/game/assets/images/placeholder logo.png">
 
 <style>
-        html {
-            height: 100%;
-            width: 100%;
-            background: url("space.webp") no-repeat center/cover;
+    html {
+        height: 100%;
+        width: 100%;
+        background: url("space.webp") no-repeat center/cover;
+    }
+
+    body {
+        margin: 0;
+    }
+
+    .disclaimer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        color: #ffffff;
+        font: 10px Arial, sans-serif;
+        padding: 5px 0;
+    }
+
+    .cinematic-bar,
+    .top-bar,
+    .bottom-bar {
+        position: fixed;
+        width: 100%;
+    }
+
+    .cinematic-bar {
+        height: 64px;
+        line-height: 64px;
+        font: 48px "FOT Pop Happiness Std Stripped";
+        color: #fff;
+        text-align: center;
+    }
+
+    .top-bar {
+        top: 0;
+        padding: 0 0 40px;
+        text-shadow: 0 5px 6px #001338;
+        background: linear-gradient(#0115f484, #114cfe97, #5ebce5cf);
+        box-shadow: 0 4px 30px #00b3ff;
+        backdrop-filter: blur(1.2px);
+        -webkit-backdrop-filter: blur(1.2px);
+    }
+
+    .bottom-bar {
+        bottom: 0;
+        padding: 30px 0;
+        background: linear-gradient(#5ebce5cf, #114cfe97, #0115f484);
+        box-shadow: 0 4px 30px #00b3ff;
+        backdrop-filter: blur(1.2px);
+        -webkit-backdrop-filter: blur(1.2px);
+        line-height: 64px;
+        color: #000;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 0px 20px 0px 20px;
+        font-size: 32px;
+        border-radius: 32px;
+        border: 6px solid #8AFFEB;
+        background: linear-gradient(to bottom, #f2fbff, #67BFE8);
+        box-shadow: inset #0068adaa 0 0 4px 3px;
+        text-decoration: none;
+        color: #000000;
+    }
+
+    .star {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: pointer;
+    }
+
+    .fade-in-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(255, 255, 255);
+        opacity: 1;
+        z-index: 10;
+        transition: opacity 3s ease;
+    }
+
+    .rotating-background {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 120vw;
+        height: 120vw;
+        background-image: url('radical.svg');
+        background-size: cover;
+        background-position: center;
+        animation: rotateBackground 20s linear infinite;
+        opacity: 0.1;
+        transform: translate(-50%, -50%);
+        filter: invert(1) blur(1.2vh);
+    }
+
+    @keyframes rotateBackground {
+        from {
+            transform: translate(-50%, -50%) rotate(360deg);
         }
 
-        body {
-            margin: 0;
+        to {
+            transform: translate(-50%, -50%) rotate(0deg);
         }
+    }
 
-        .disclaimer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-            color: #ffffff;
-            font: 10px Arial, sans-serif;
-            padding: 5px 0;
-        }
+    @font-face {
+        font-family: 'FOT Pop Happiness Std Stripped';
+        src: local('FOT Pop Happiness Std Stripped ExtraBold'), local('FOTPopHappinessStrp-ExtraBold'),
+            url('FOTPopHappinessStrp-ExtraBold.woff2') format('woff2'),
+            url('FOTPopHappinessStrp-ExtraBold.woff') format('woff');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
 
-        .cinematic-bar,
-        .top-bar,
-        .bottom-bar {
-            position: fixed;
-            width: 100%;
-        }
-
-        .cinematic-bar {
-            height: 64px;
-            line-height: 64px;
-            font: 48px "FOT Pop Happiness Std Stripped";
-            color: #fff;
-            text-align: center;
-        }
-
-        .top-bar {
-            top: 0;
-            padding: 0 0 40px;
-            text-shadow: 0 5px 6px #001338;
-            background: linear-gradient(#0115f484, #114cfe97, #5ebce5cf);
-            box-shadow: 0 4px 30px #00b3ff;
-            backdrop-filter: blur(1.2px);
-            -webkit-backdrop-filter: blur(1.2px);
-        }
-
-        .bottom-bar {
-            bottom: 0;
-            padding: 30px 0;
-            background: linear-gradient(#5ebce5cf, #114cfe97, #0115f484);
-            box-shadow: 0 4px 30px #00b3ff;
-            backdrop-filter: blur(1.2px);
-            -webkit-backdrop-filter: blur(1.2px);
-            line-height: 64px;
-            color: #000;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 0px 20px 0px 20px;
-            font-size: 32px;
-            border-radius: 32px;
-            border: 6px solid #8AFFEB;
-            background: linear-gradient(to bottom, #f2fbff, #67BFE8);
-            box-shadow: inset #0068adaa 0 0 4px 3px;
-            text-decoration: none;
-            color: #000000;
-        }
-
-        .star {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            cursor: pointer;
-        }
-
-        .fade-in-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgb(255, 255, 255);
-            opacity: 1;
-            z-index: 10;
-            transition: opacity 3s ease;
-        }
-
-        .rotating-background {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            width: 120vw;
-            height: 120vw;
-            background-image: url('radical.svg');
-            background-size: cover;
-            background-position: center;
-            animation: rotateBackground 20s linear infinite;
-            opacity: 0.1;
-            transform: translate(-50%, -50%);
-            filter: invert(1) blur(1.2vh);
-        }
-
-        @keyframes rotateBackground {
-            from {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
-
-            to {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-        }
-
-        @font-face {
-            font-family: 'FOT Pop Happiness Std Stripped';
-            src: local('FOT Pop Happiness Std Stripped ExtraBold'), local('FOTPopHappinessStrp-ExtraBold'),
-                url('FOTPopHappinessStrp-ExtraBold.woff2') format('woff2'),
-                url('FOTPopHappinessStrp-ExtraBold.woff') format('woff');
-            font-weight: bold;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        .speech-bubble {
-            position: absolute;
-            background-color: #00a2ff;
-            padding: 10px;
-            border-radius: 16px;
-            color: #fff;
-            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.6);
-            display: none;
-            vertical-align: middle;
-            pointer-events: none;
-        }
-    </style>
+    .speech-bubble {
+        position: absolute;
+        background-color: #00a2ff;
+        padding: 10px;
+        border-radius: 16px;
+        color: #fff;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.6);
+        display: none;
+        vertical-align: middle;
+        pointer-events: none;
+    }
+</style>
 </head>
 
 <body>
@@ -239,19 +239,18 @@
     </script>
 </body>
 <!--
-		©It'z_Miles 2023 - some rights rerserved.
+    ©It'z_Miles 2023 - some rights rerserved.
 
-		Licensed under the Apache License, Version 2.0 (the "License");
-		you may not use this file except in compliance with the License.
-		You may obtain a copy of the License at
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
 
-			http://www.apache.org/licenses/LICENSE-2.0
+        http://www.apache.org/licenses/LICENSE-2.0
 
-		Unless required by applicable law or agreed to in writing, software
-		distributed under the License is distributed on an "AS IS" BASIS,
-		WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-		See the License for the specific language governing permissions and
-		limitations under the License.
- -->
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
 </html>
-  

@@ -119,9 +119,24 @@
             }
         }
 
-        @media (orientation: portrait) {
+        @media screen and (orientation: portrait) {
             .editor {
                 display: none;
+            }
+
+            .message {
+                text-align: center;
+                display: center;
+                color: #FFF;
+                width: 80%;
+                max-width: 100%;
+                height: 100%;
+                margin: 0 auto;
+            }
+
+            .glowing-box {
+                display: center;
+                margin: 0 auto;
             }
         }
     </style>
